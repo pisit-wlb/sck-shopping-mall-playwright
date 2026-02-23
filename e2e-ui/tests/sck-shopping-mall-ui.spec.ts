@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('การสั่งซื้อสินค้าและตรวจผลของการซื้อในตะกร้า', async ({ page }) => {
+test('การสั่งซื้อสินค้า โดยที่มีการจัดส่งแบบ Thai Post และชำระเงินด้วยบัตรเครดิต Visa สำเร็จ', async ({ page }) => {
 	await test.step('เข้าหน้า Website', async () => {
 		await page.goto('http://139.59.225.96/auth/login');
 });
@@ -39,13 +39,13 @@ test('การสั่งซื้อสินค้าและตรวจ�
 		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
 		await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
-		await expect(page.locator("[id='shopping-cart-subtotal-price']")).toHaveText("฿12,943.80");
+		await expect(page.locator("[id='shopping-cart-subtotal-price']")).toHaveText("฿12,943.79");
 	});
 
 	await test.step("ตรวจสอบข้อมูลการของ Orders ในหน้า Summary", async () => {
 		await page.locator("[id='shopping-cart-checkout-btn']").click();
 		await expect(page.locator("[id='product-1-name']")).toHaveText("Balance Training Bicycle");
-		await expect(page.locator("[id='product-1-price']")).toHaveText("12,943.80");
+		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
 		await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
 	});
@@ -54,6 +54,10 @@ test('การสั่งซื้อสินค้าและตรวจ�
 		await page.locator("[id='shipping-form-first-name-input']").fill("Pisit");
 		await page.locator("[id='shipping-form-last-name-input']").fill("Wanakitrungrueng");
 		await page.locator("[id='shipping-form-address-input']").fill("99/49 หมู่บ้าน ดลลชา ซอย สุขสวัสดิ์ 70");
-		
-	});
+		await page.locator("[id='shipping-form-province-select']").selectOption("กรุงเทพมหานคร");
+		await page.locator("[id='shipping-form-district-select']").selectOption("เขตทุ่งครุ");
+		await page.locator("[id='shipping-form-sub-district-select']").selectOption("ทุ่งครุ");
+		await expect(page.locator("[id='shipping-form-zipcode-input']")).toHaveAttribute('value', '10140');
+		await page.locator("[id='shipping-method-2-input']").click();
+		});
 });
