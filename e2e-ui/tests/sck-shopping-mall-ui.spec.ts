@@ -60,4 +60,15 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await expect(page.locator("[id='shipping-form-zipcode-input']")).toHaveAttribute('value', '10140');
 		await page.locator("[id='shipping-method-2-input']").click();
 		});
+
+	await test.step("กรอกข้อมูลบัตรเครดิต และประเภทบัตรเครดิต", async () => {
+		await page.locator("[id='payment-credit-form-fullname-input']").fill("Pisit Wanakitrungrueng");
+		await page.locator("[id='payment-credit-form-card-number-input']").fill("12345678910111213");
+		await page.locator("[id='payment-credit-form-expiry-input']").fill("0528");
+		await page.locator("[id='payment-credit-form-cvv-input']").fill("589");
+	});
+	
+	await test.step("ตรวจสอบข้อมูลของ Orders ในส่วนของ Summary", async () => {
+
+	});
 });
