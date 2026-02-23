@@ -6,9 +6,9 @@ test('การสั่งซื้อสินค้าและตรวจ�
 });
 
 	await test.step('ขั้นตอนการ Login', async () => {
-	await page.locator("[id='login-username-input']").fill("user_4");
-	await page.locator("[id='login-password-input']").fill("P@ssw0rd");
-	await page.locator("[id='login-btn']").click();
+		await page.locator("[id='login-username-input']").fill("user_4");
+		await page.locator("[id='login-password-input']").fill("P@ssw0rd");
+		await page.locator("[id='login-btn']").click();
 });
 
 	await test.step("ทดสอบการค้นหาโดยการกรอก Bicycle", async () => {
@@ -50,4 +50,10 @@ test('การสั่งซื้อสินค้าและตรวจ�
 		await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
 	});
 
+	await test.step("กรอกข้อมูลชื่อ-นามสกุล, ที่อยู่ และเลือกวิธีการจัดส่ง", async () => {
+		await page.locator("[id='shipping-form-first-name-input']").fill("Pisit");
+		await page.locator("[id='shipping-form-last-name-input']").fill("Wanakitrungrueng");
+		await page.locator("[id='shipping-form-address-input']").fill("99/49 หมู่บ้าน ดลลชา ซอย สุขสวัสดิ์ 70");
+		
+	});
 });
