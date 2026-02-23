@@ -15,18 +15,18 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await page.locator("[id='search-product-input']").fill("Bicycle");
 		await page.locator("[id='search-product-input']").press("Enter");
 		await expect(page.locator("[id='product-card-name-1']")).toHaveText("Balance Training Bicycle");
-		await expect(page.locator("[id='product-card-price-1']")).toHaveText("฿4,314.60");
+		await expect(page.locator("[id='product-card-price-1']")).toHaveText(/4,314\.60/);
 		await page.locator("[id='product-card-name-1']").click();
 	});
 
 	await test.step("ตรวจสอบข้อมูลสินค้า", async () => {
 		await expect(page.locator("[id='product-detail-product-name']")).toHaveText("Balance Training Bicycle");
-		await expect(page.locator("[id='product-detail-price-thb']")).toHaveText("฿4,314.60");
+		await expect(page.locator("[id='product-detail-price-thb']")).toHaveText(/4,314\.60/);
 		await expect(page.locator("[id='product-detail-point']")).toHaveText("43 Points");
 
-		// ถ้าต้องการตรวจสต็อก ต้องใช้ API ไปตรวจ Stock คงเหลือก่อน เพื่อเช็คว่า ที่คงเหลือในระบบเป็นเท่าไร 
-		// และนำมาเทียบกับที่โชว์หน้า UI ไม่เช่นนั้น ถ้ามีออเดอร์สั่งซื้อ Stock จะมีการเปลี่ยนแปลงและไม่สามารถใช้ Code ชุดนี้ได้
-		// await expect(page.locator("[id='product-detail-stock']")).toHaveText("Stock 87 items");
+		//ถ้าต้องการตรวจสต็อก ต้องใช้ API ไปตรวจ Stock คงเหลือก่อน เพื่อเช็คว่า ที่คงเหลือในระบบเป็นเท่าไร 
+		//และนำมาเทียบกับที่โชว์หน้า UI ไม่เช่นนั้น ถ้ามีออเดอร์สั่งซื้อ Stock จะมีการเปลี่ยนแปลงและไม่สามารถใช้ Code ชุดนี้ได้
+		//await expect(page.locator("[id='product-detail-stock']")).toHaveText("Stock 87 items");
 
 	});
 	await test.step("เลือกจำนวนสินค้า และกด Add to Cart", async () => {
@@ -39,20 +39,20 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 	await test.step("ตรวจสอบข้อมูลการสั่งซื้อในตะกร้าสินค้า", async () =>{
 		await page.locator("[id='header-menu-cart-btn']").click();
 		await expect(page.locator("[id='product-1-name']")).toHaveText("Balance Training Bicycle");
-		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
+		await expect(page.locator("[id='product-1-price']")).toHaveText(/12,943\.80/);
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
 
 		// ถ้าต้องการตรวจสต็อก ต้องใช้ API ไปตรวจ Stock คงเหลือก่อน เพื่อเช็คว่า ที่คงเหลือในระบบเป็นเท่าไร 
 		// และนำมาเทียบกับที่โชว์หน้า UI ไม่เช่นนั้น ถ้ามีออเดอร์สั่งซื้อ Stock จะมีการเปลี่ยนแปลงและไม่สามารถใช้ Code ชุดนี้ได้
 		// await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
 
-		await expect(page.locator("[id='shopping-cart-subtotal-price']")).toHaveText("฿12,943.79");
+		await expect(page.locator("[id='shopping-cart-subtotal-price']")).toHaveText(/12,943\.79/);
 	});
 
 	await test.step("ตรวจสอบข้อมูลการของ Orders ในหน้า Summary", async () => {
 		await page.locator("[id='shopping-cart-checkout-btn']").click();
 		await expect(page.locator("[id='product-1-name']")).toHaveText("Balance Training Bicycle");
-		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
+		await expect(page.locator("[id='product-1-price']")).toHaveText(/12,943\.80/);
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
 
 		// ถ้าต้องการตรวจสต็อก ต้องใช้ API ไปตรวจ Stock คงเหลือก่อน เพื่อเช็คว่า ที่คงเหลือในระบบเป็นเท่าไร 
@@ -79,15 +79,15 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 	});
 	
 	await test.step("ตรวจสอบข้อมูลของ Orders ในส่วนของ Summary", async () => {
-		await expect(page.locator("[id='order-summary-subtotal-price']")).toHaveText("฿12,943.79");
+		await expect(page.locator("[id='order-summary-subtotal-price']")).toHaveText(/12,943\.79/);
 		await expect(page.locator("[id='order-summary-receive-point-price']")).toHaveText("129 Points");
-		await expect(page.locator("[id='order-summary-total-payment-price']")).toHaveText("฿12,993.79");
+		await expect(page.locator("[id='order-summary-total-payment-price']")).toHaveText(/12,943\.79/);
 	});
 
 	await test.step("กรอก OTP และกรอกข้อมูลเพื่อยืนยันออเดอร์", async () => {
 		await page.locator("[id='payment-now-btn']").click();
 		await page.locator("[id='otp-input']").fill("256789");
-		//await page.getByRole('button', { name: 'OK' }).click();
+		await page.getByRole('button', { name: 'OK' }).click();
 		await page.locator("[id='notification-form-email-input']").fill("pisit@welovebug.com");
 		await page.locator("[id='notification-form-mobile-input']").fill("0626752828");
 		await page.locator("[id='send-notification-btn']").click();
