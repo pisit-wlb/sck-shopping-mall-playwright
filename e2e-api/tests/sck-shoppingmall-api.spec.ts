@@ -1,8 +1,7 @@
 import { test, expect, request } from '@playwright/test';
 
 test("ค้นหาและซื้อสินค้า เลือกวิธีจัดส่งเป็น Thai Post และชำระเงินด้วยบัตรเครดิต Visa สำเร็จ", async ({ request }) => {
-
-	let 
+	
 	await test.step("ดำเนินการเข้าสู่ระบบด้วย Username และ Password", async () => {
 		const reponseLogin = await request.post('http://139.59.225.96/api/v1/login', {
 			data : {
