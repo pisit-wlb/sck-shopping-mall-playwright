@@ -68,7 +68,7 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await page.locator("[id='shipping-form-district-select']").selectOption("เขตทุ่งครุ");
 		await page.locator("[id='shipping-form-sub-district-select']").selectOption("ทุ่งครุ");
 		await expect(page.locator("[id='shipping-form-zipcode-input']")).toHaveAttribute('value', '10140');
-		await page.locator("[id='shipping-method-2-input']").click();
+		await page.locator('label[for="shipping-method-2-input"]').click();
 		});
 
 	await test.step("กรอกข้อมูลบัตรเครดิต และประเภทบัตรเครดิต", async () => {
@@ -87,7 +87,10 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 	await test.step("กรอก OTP และกรอกข้อมูลเพื่อยืนยันออเดอร์", async () => {
 		await page.locator("[id='payment-now-btn']").click();
 		await page.locator("[id='otp-input']").fill("256789");
-		await page.getByRole('button', { name: 'OK' }).click();
+		//await page.getByRole('button', { name: 'OK' }).click();
+		await page.locator("[id='notification-form-email-input']").fill("pisit@welovebug.com");
+		await page.locator("[id='notification-form-mobile-input']").fill("0626752828");
+		await page.locator("[id='send-notification-btn']").click();
 	});
 
 });
