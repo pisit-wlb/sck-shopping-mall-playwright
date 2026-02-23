@@ -58,7 +58,6 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await page.locator("[id='shipping-form-district-select']").selectOption("เขตทุ่งครุ");
 		await page.locator("[id='shipping-form-sub-district-select']").selectOption("ทุ่งครุ");
 		await expect(page.locator("[id='shipping-form-zipcode-input']")).toHaveAttribute('value', '10140');
-		await page.locator("[id='shipping-method-2-input']").click();
 		});
 
 	await test.step("กรอกข้อมูลบัตรเครดิต และประเภทบัตรเครดิต", async () => {
@@ -69,6 +68,12 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 	});
 	
 	await test.step("ตรวจสอบข้อมูลของ Orders ในส่วนของ Summary", async () => {
-
+		await expect(page.locator("[id='order-summary-subtotal-price']")).toHaveText("฿12,943.79");
+		await expect(page.locator("[id='order-summary-receive-point-price']")).toHaveText("129 Points");
+		await expect(page.locator("[id='order-summary-total-payment-price']")).toHaveText("฿12,993.79");
 	});
+
+	// await test.step("กรอกข้อมูลเพื่อชำระเงิน", async () => {
+
+	// });
 });
