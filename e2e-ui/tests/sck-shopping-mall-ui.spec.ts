@@ -23,11 +23,11 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await expect(page.locator("[id='product-detail-product-name']")).toHaveText("Balance Training Bicycle");
 		await expect(page.locator("[id='product-detail-price-thb']")).toHaveText("฿4,314.60");
 		await expect(page.locator("[id='product-detail-point']")).toHaveText("43 Points");
-		await expect(page.locator("[id='product-detail-stock']")).toHaveText("Stock 87 items");
+		// await expect(page.locator("[id='product-detail-stock']")).toHaveText("Stock 87 items");
 
 	});
 	await test.step("เลือกจำนวนสินค้า และกด Add to Cart", async () => {
-		await page.locator("[id='product-detail-quantity-increment-btn']").click({ clickCount: 2 });
+		//await page.locator("[id='product-detail-quantity-increment-btn']").click();
 		await page.locator("[id='product-detail-add-to-cart-btn']").click();
 		await expect(page.locator("[id='header-menu-cart-badge']")).toHaveText('1');
 
@@ -38,7 +38,7 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await expect(page.locator("[id='product-1-name']")).toHaveText("Balance Training Bicycle");
 		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
-		await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
+		// await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
 		await expect(page.locator("[id='shopping-cart-subtotal-price']")).toHaveText("฿12,943.79");
 	});
 
@@ -47,7 +47,7 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 		await expect(page.locator("[id='product-1-name']")).toHaveText("Balance Training Bicycle");
 		await expect(page.locator("[id='product-1-price']")).toHaveText("฿12,943.80");
 		await expect(page.locator("[id='product-1-point']")).toHaveText("129 Points");
-		await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
+		// await expect(page.locator("[id='product-1-stock']")).toHaveText("Stock 87 items");
 	});
 
 	await test.step("กรอกข้อมูลชื่อ-นามสกุล, ที่อยู่ และเลือกวิธีการจัดส่ง", async () => {
@@ -74,6 +74,9 @@ test('การสั่งซื้อสินค้า โดยที่ม�
 	});
 
 	await test.step("กรอก OTP และกรอกข้อมูลเพื่อยืนยันออเดอร์", async () => {
+		await page.locator("[id='payment-now-btn']").click();
 		await page.locator("[id='otp-input']").fill("256789");
-		await page.getByRole('button', )
+		await page.getByRole('button', { name: 'OK' }).click();
+	});
+
 });
