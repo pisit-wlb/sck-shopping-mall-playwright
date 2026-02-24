@@ -22,4 +22,13 @@ test("การสั่งซื้อสินค้า โดยที่ม�
 	expect((await responseSearchProduct.json()).products[0].product_name).toBe("Balance Training Bicycle");
 	expect((await responseSearchProduct.json()).products[0].product_price_thb).toBe(4314.6);
 
+	const responseDetail = await request.get("http://139.59.225.96/api/v1/product/1", {
+		headers: {
+			"Authorization" : "Bearer " + accessToken,
+		}
+	}
+	);
+	expect(responseDetail.ok()).toBeTruthy();
+	expect((await responseDetail.json()).product_name).toBe("Balance Training Bicycle");
+	expect((await responseDetail.json()).product_price_thb).toBe(4314.6);
 });
