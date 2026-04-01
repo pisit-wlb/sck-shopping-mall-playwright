@@ -77,7 +77,7 @@
 
 ```
 [Edited]: Refactor login test ใช้ Page Object Model แยก locator และ action ไปไว้ใน pages/login.page.ts เพื่อลด duplication
-```
+```j
 
 ### `[Fixed]` — แก้ bug ใน test code
 
